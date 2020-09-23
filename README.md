@@ -1,0 +1,1 @@
+Backend for Angular Heroes Tutorial providing Heroes-Data via Springboot REST-Service 
