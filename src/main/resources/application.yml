@@ -1,6 +1,6 @@
 server:
     port: 8080
-    context-path: /heroes-service/webapi
+    context-path: /heroes-service/
 
 spring: 
     main:
