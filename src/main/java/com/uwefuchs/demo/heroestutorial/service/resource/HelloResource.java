@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 import org.springframework.stereotype.Service;
 
 @Service
-@Path("/hello")
+@Path("hello")
 public class HelloResource {
 
     @GET
