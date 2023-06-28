@@ -29,22 +29,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
 			throws IOException, ServletException {
 
-		HttpServletRequest httpRequest = (HttpServletRequest) req;
-		Enumeration<String> headerNames = httpRequest.getHeaderNames();
-
-		if (headerNames != null) {
-			System.out.println("===========================================================================");
-			headerNames = httpRequest.getHeaderNames();
-			while (headerNames.hasMoreElements()) {
-				String headerName = headerNames.nextElement();
-				System.out.print("Header: [" + headerName + "]");
-				System.out.println(" with content: " + httpRequest.getHeader(headerName));
-			}
-			System.out.println("===========================================================================");
-		}
-
-		headerNames = httpRequest.getHeaderNames();
-
 		String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
 
 		try {
