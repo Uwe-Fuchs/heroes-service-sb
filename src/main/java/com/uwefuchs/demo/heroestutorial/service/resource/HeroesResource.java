@@ -58,8 +58,7 @@ public class HeroesResource {
     public Collection<Hero> searchHeroesByName(@QueryParam("name") String name) {
         LOG.debug("searching heroes by name [{}]...", name);
 
-        Set<Hero> result = new HashSet<>();
-        result.addAll(HEROES_MAP.values());        
+        final Set<Hero> result = new HashSet<>(HEROES_MAP.values());
 
         return result
             .stream()
