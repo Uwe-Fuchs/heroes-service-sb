@@ -10,7 +10,7 @@ services:
       SERVER_SERVLET_CONTEXT-PATH: "/heroes-service"
       LOGGING_LEVEL_ROOT: "INFO"
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: "INFO"
-      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n
+#      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n
     ports:
       - "8083:8083"
 #      - "5005:5005"

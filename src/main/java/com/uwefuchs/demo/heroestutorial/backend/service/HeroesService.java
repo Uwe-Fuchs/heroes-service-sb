@@ -19,8 +19,8 @@ public class HeroesService {
     private static final Logger LOG = LoggerFactory.getLogger(HeroesService.class);
 
     @Inject
-    //@Qualifier("inMemoryHeroesRepository")
-    @Qualifier("jpaHeroesRepository")
+    @Qualifier("inMemoryHeroesRepository")
+    //@Qualifier("jpaHeroesRepository")
     private IHeroesRepository heroesRepository;
 
     public Collection<Hero> retrieveAllHeroes() {
@@ -53,7 +53,7 @@ public class HeroesService {
         Assert.notNull(id, "hero-id must not be null");
         Assert.hasText(hero.getName(), "a hero always has a name!");
 
-        if (heroesRepository.existsById(id)) {
+        if (!heroesRepository.existsById(id)) {
             throw new HeroNotFoundException(String.format("no hero found with id [%d]", hero.getId()));
         }
 

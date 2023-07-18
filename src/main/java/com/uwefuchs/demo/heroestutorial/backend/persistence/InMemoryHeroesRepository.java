@@ -25,7 +25,7 @@ public class InMemoryHeroesRepository implements IHeroesRepository {
         Assert.hasText(hero.getName(), "a hero always has a name!");
 
         LOG.debug("creating hero with name [{}]...", hero.getName());
-        if (hero.getId() == 0) {
+        if (hero.getId() == null) {
             final Hero newHero = new Hero(HeroesCreatingHelper.getNextId(), hero.getName());
             heroesMap.put(newHero.getId(), newHero);
             LOG.debug("hero [{}] successfully created with id [{}].", newHero.getName(), newHero.getId());
