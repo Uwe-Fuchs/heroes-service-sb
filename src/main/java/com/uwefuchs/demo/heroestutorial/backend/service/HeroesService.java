@@ -28,7 +28,7 @@ public class HeroesService {
 
     public Hero retrieveHeroById(Integer id) {
         Assert.notNull(id, "hero-id must not be null");
-        if (heroesRepository.existsById(id)) {
+        if (!heroesRepository.existsById(id)) {
             throw new HeroNotFoundException(String.format("no hero found with id [%d]", id));
         }
 

@@ -42,12 +42,18 @@ public class InMemoryHeroesRepository implements IHeroesRepository {
     @Override
     public Optional<Hero> findById(Integer id) {
         LOG.debug("delivering hero with id [{}]...", id);
-        return Optional.of(heroesMap.get(id));
+        final Hero hero = heroesMap.get(id);
+
+        if (hero == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(hero);
+        }
     }
 
     @Override
     public boolean existsById(Integer id) {
-        return findById(id).isEmpty();
+        return findById(id).isPresent();
     }
 
     @Override

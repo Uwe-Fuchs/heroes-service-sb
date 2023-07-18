@@ -16,28 +16,33 @@ public class HeroesServiceExceptionMapper implements ExceptionMapper<Throwable> 
 
 	@Override
 	public Response toResponse(Throwable e) {		
-		LOG.error("Error during heroes-service-backend!", e);
+		LOG.error("Error in heroes-service-backend!", e);
 
 		if (HeroNotFoundException.class.isAssignableFrom(e.getClass())) {
-			return new NotFoundException(e.getMessage()).getResponse();
+			return Response
+					.status(Response.Status.NOT_FOUND)
+					.entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()))
+					.build();
 		}
 
-		if (HeroesException.class.isAssignableFrom(e.getClass())) {
-			return new BadRequestException(e.getMessage()).getResponse();
+		if (HeroesException.class.isAssignableFrom(e.getClass())
+				|| IllegalArgumentException.class.isAssignableFrom(e.getClass())) {
+			return Response
+					.status(Response.Status.BAD_REQUEST)
+					.entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()))
+					.build();
 		}
 
 		if (WebApplicationException.class.isAssignableFrom(e.getClass())) {
 			WebApplicationException wex = (WebApplicationException) e;
-			return wex.getResponse();
-		}
-
-		if (IllegalArgumentException.class.isAssignableFrom(e.getClass())) {
-			return new BadRequestException(e.getMessage()).getResponse();
+			return Response
+					.status(wex.getResponse().getStatusInfo())
+					.entity(new ErrorMessage(wex.getResponse().getStatus(), wex.getMessage()))
+					.build();
 		}
         
         return Response
         		.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity(new ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), "interner Server-Fehler!"))
                 .build();
 	}
 }
