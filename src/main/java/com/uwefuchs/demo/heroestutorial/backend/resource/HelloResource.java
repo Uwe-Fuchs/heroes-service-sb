@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.resource;
+package com.uwefuchs.demo.heroestutorial.backend.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

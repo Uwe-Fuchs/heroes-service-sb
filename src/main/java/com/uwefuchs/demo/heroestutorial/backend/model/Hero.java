@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.model;
+package com.uwefuchs.demo.heroestutorial.backend.model;
 
 import java.io.Serializable;
 
@@ -34,7 +34,7 @@ public class Hero implements Serializable {
 
     public boolean nameContains(String sequence) {
         return sequence != null 
-            && "" != sequence.trim() 
+            && !"".equals(sequence.trim())
             && this.getName() != null 
             && this.getName().trim().toLowerCase().contains(sequence.trim().toLowerCase());
     }

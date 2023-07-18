@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.exception;
+package com.uwefuchs.demo.heroestutorial.backend.exception;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;

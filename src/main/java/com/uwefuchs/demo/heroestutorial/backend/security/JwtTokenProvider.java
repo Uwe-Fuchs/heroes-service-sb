@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.security;
+package com.uwefuchs.demo.heroestutorial.backend.security;
 
 import java.util.Arrays;
 import java.util.Base64;

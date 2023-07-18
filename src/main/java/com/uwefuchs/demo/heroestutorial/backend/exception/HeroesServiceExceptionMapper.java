@@ -1,5 +1,7 @@
-package com.uwefuchs.demo.heroestutorial.service.exception;
+package com.uwefuchs.demo.heroestutorial.backend.exception;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -14,11 +16,23 @@ public class HeroesServiceExceptionMapper implements ExceptionMapper<Throwable> 
 
 	@Override
 	public Response toResponse(Throwable e) {		
-		LOG.error("Fehler beim Ausführen des Heroes-Service!", e);
-		
+		LOG.error("Error during heroes-service-backend!", e);
+
+		if (HeroNotFoundException.class.isAssignableFrom(e.getClass())) {
+			return new NotFoundException(e.getMessage()).getResponse();
+		}
+
+		if (HeroesException.class.isAssignableFrom(e.getClass())) {
+			return new BadRequestException(e.getMessage()).getResponse();
+		}
+
 		if (WebApplicationException.class.isAssignableFrom(e.getClass())) {
-			WebApplicationException wex = (WebApplicationException) e;			
+			WebApplicationException wex = (WebApplicationException) e;
 			return wex.getResponse();
+		}
+
+		if (IllegalArgumentException.class.isAssignableFrom(e.getClass())) {
+			return new BadRequestException(e.getMessage()).getResponse();
 		}
         
         return Response

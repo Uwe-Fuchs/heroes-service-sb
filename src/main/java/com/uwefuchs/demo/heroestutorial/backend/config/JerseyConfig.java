@@ -1,14 +1,13 @@
-package com.uwefuchs.demo.heroestutorial.service.config;
+package com.uwefuchs.demo.heroestutorial.backend.config;
 
 import java.util.Collections;
 
+import com.uwefuchs.demo.heroestutorial.backend.exception.HeroesServiceExceptionMapper;
+import com.uwefuchs.demo.heroestutorial.backend.helper.CORSResponseFilter;
+import com.uwefuchs.demo.heroestutorial.backend.resource.HelloResource;
+import com.uwefuchs.demo.heroestutorial.backend.resource.HeroesResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
-
-import com.uwefuchs.demo.heroestutorial.service.exception.HeroesServiceExceptionMapper;
-import com.uwefuchs.demo.heroestutorial.service.helper.CORSResponseFilter;
-import com.uwefuchs.demo.heroestutorial.service.resource.HelloResource;
-import com.uwefuchs.demo.heroestutorial.service.resource.HeroesResource;
 
 @Configuration
 public class JerseyConfig extends ResourceConfig {

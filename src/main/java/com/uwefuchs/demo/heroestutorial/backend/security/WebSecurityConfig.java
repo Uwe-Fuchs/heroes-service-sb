@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.security;
+package com.uwefuchs.demo.heroestutorial.backend.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

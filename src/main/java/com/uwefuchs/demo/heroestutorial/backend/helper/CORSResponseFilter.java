@@ -1,4 +1,4 @@
-package com.uwefuchs.demo.heroestutorial.service.helper;
+package com.uwefuchs.demo.heroestutorial.backend.helper;
 
 import java.io.IOException;
 

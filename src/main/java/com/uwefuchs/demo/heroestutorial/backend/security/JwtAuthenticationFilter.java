@@ -1,7 +1,6 @@
-package com.uwefuchs.demo.heroestutorial.service.security;
+package com.uwefuchs.demo.heroestutorial.backend.security;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
