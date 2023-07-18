@@ -3,6 +3,7 @@ package com.uwefuchs.demo.heroestutorial.backend.service;
 import com.uwefuchs.demo.heroestutorial.backend.exception.HeroNotFoundException;
 import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
 import com.uwefuchs.demo.heroestutorial.backend.persistence.IHeroesRepository;
+import org.glassfish.jersey.internal.guava.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,8 +19,8 @@ public class HeroesService {
     private static final Logger LOG = LoggerFactory.getLogger(HeroesService.class);
 
     @Inject
-    @Qualifier("inMemoryHeroesRepository")
-    //@Qualifier("jpaHeroesRepository")
+    //@Qualifier("inMemoryHeroesRepository")
+    @Qualifier("jpaHeroesRepository")
     private IHeroesRepository heroesRepository;
 
     public Collection<Hero> retrieveAllHeroes() {
@@ -44,12 +45,7 @@ public class HeroesService {
         final Collection<Hero> allHeroes = new ArrayList<>();
 
         LOG.info("searching heroes by name [{}]...", heroName);
-        heroesRepository.findAll().forEach(h -> {
-            if (heroName.equalsIgnoreCase(h.getName())) {
-                allHeroes.add(h);
-            }});
-
-        return allHeroes;
+        return Lists.newArrayList(heroesRepository.findByNameIgnoreCase(heroName));
     }
 
     public Hero updateHero(Hero hero, Integer id) {

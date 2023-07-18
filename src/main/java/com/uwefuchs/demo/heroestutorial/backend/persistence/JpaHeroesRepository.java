@@ -4,4 +4,5 @@ import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JpaHeroesRepository extends JpaRepository<Hero, Integer>, IHeroesRepository {
+    Iterable<Hero> findByNameIgnoreCase(String name);
 }

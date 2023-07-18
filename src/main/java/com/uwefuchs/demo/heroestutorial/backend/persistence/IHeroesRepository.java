@@ -9,6 +9,8 @@ public interface IHeroesRepository {
 
     Optional<Hero> findById(Integer id);
 
+    Iterable<Hero> findByNameIgnoreCase(String name);
+
     boolean existsById(Integer id);
 
     Iterable<Hero> findAll();

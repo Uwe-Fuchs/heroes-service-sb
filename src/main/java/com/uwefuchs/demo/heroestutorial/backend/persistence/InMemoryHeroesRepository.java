@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class InMemoryHeroesRepository implements IHeroesRepository {
@@ -49,6 +47,19 @@ public class InMemoryHeroesRepository implements IHeroesRepository {
         } else {
             return Optional.of(hero);
         }
+    }
+
+    @Override
+    public Iterable<Hero> findByNameIgnoreCase(String name) {
+        final Collection<Hero> allHeroes = new ArrayList<>();
+
+        LOG.debug("searching heroes by name [{}]...", name);
+        this.findAll().forEach(h -> {
+            if (name.equalsIgnoreCase(h.getName())) {
+                allHeroes.add(h);
+            }});
+
+        return allHeroes;
     }
 
     @Override
