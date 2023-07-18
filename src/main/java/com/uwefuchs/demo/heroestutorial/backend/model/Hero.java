@@ -6,12 +6,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity(name="HERO")
 public class Hero implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private int id;
+
+    @Id
+	private Integer id;
     private String name;
     
     // jackson
@@ -19,7 +24,7 @@ public class Hero implements Serializable {
 	private Hero() {    	
     }
 
-    public Hero (int id, String name) {
+    public Hero (Integer id, String name) {
         this.id = id;
         this.name = name;
     }

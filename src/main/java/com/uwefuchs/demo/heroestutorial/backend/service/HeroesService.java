@@ -5,6 +5,7 @@ import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
 import com.uwefuchs.demo.heroestutorial.backend.persistence.IHeroesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -17,6 +18,8 @@ public class HeroesService {
     private static final Logger LOG = LoggerFactory.getLogger(HeroesService.class);
 
     @Inject
+    @Qualifier("inMemoryHeroesRepository")
+    //@Qualifier("jpaHeroesRepository")
     private IHeroesRepository heroesRepository;
 
     public Collection<Hero> retrieveAllHeroes() {
@@ -42,7 +45,7 @@ public class HeroesService {
 
         LOG.info("searching heroes by name [{}]...", heroName);
         heroesRepository.findAll().forEach(h -> {
-            if (heroName.toLowerCase().equals(h.getName())) {
+            if (heroName.equalsIgnoreCase(h.getName())) {
                 allHeroes.add(h);
             }});
 
