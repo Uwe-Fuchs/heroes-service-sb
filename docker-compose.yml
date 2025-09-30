@@ -1,27 +1,29 @@
+volumes:
+  db-mysql:
+    driver: local
+
 networks:
-  heroes_net:
+  heroes-net:
     external: true
     name: heroes-net
 
-volumes:
-  db-mysql:
-
 services:
-  db-mysql:
-    container_name: "mysql-heroes"
-    image: mysql:8.0
-    cap_add:
-      - SYS_NICE
-    restart: always
-    environment:
-      - MYSQL_DATABASE=heroes
-      - MYSQL_ROOT_PASSWORD=sql
-    networks:
-      - heroes_net
-    ports:
-      - '3306:3306'
-    volumes:
-      - db-mysql:/var/lib/mysql
+#  db-mysql:
+#    container_name: "mysql-heroes"
+#    image: mysql:8.0
+#    cap_add:
+#      - SYS_NICE
+#    restart: always
+#    environment:
+#      - MYSQL_DATABASE=heroes
+#      - MYSQL_ROOT_PASSWORD=sql
+#    ports:
+#      - '3306:3306'
+#    volumes:
+#      - db-mysql:/var/lib/mysql
+#    networks:
+#      heroes-net:
+#        ipv4_address: 172.19.0.2
 
   heroes-service:
     image: springio/heroes-service:latest
@@ -31,9 +33,9 @@ services:
       SERVER_SERVLET_CONTEXT-PATH: "/heroes-service"
       LOGGING_LEVEL_ROOT: "INFO"
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: "INFO"
-#      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n
+    #      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n
     ports:
       - "8083:8083"
-#      - "5005:5005"
+    #      - "5005:5005"
     networks:
-      - heroes_net
+      - heroes-net
