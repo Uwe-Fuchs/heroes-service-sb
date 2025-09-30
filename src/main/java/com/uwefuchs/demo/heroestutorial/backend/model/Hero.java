@@ -1,13 +1,15 @@
 package com.uwefuchs.demo.heroestutorial.backend.model;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,7 +18,11 @@ public class Hero implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+    @Column(nullable = false)
     private String name;
     
     // jackson
@@ -39,7 +45,7 @@ public class Hero implements Serializable {
 
     public boolean nameContains(String sequence) {
         return sequence != null 
-            && !"".equals(sequence.trim())
+            && !sequence.trim().isEmpty()
             && this.getName() != null 
             && this.getName().trim().toLowerCase().contains(sequence.trim().toLowerCase());
     }

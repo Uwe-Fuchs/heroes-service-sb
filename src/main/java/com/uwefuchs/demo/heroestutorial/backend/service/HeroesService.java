@@ -19,8 +19,8 @@ public class HeroesService {
     private static final Logger LOG = LoggerFactory.getLogger(HeroesService.class);
 
     @Inject
-    @Qualifier("inMemoryHeroesRepository")
-    //@Qualifier("jpaHeroesRepository")
+    //@Qualifier("inMemoryHeroesRepository")
+    @Qualifier("jpaHeroesRepository")
     private IHeroesRepository heroesRepository;
 
     public Collection<Hero> retrieveAllHeroes() {

@@ -1,6 +1,27 @@
-version: '3.7'
+networks:
+  heroes_net:
+    external: true
+    name: heroes-net
+
+volumes:
+  db-mysql:
 
 services:
+  db-mysql:
+    container_name: "mysql-heroes"
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=heroes
+      - MYSQL_ROOT_PASSWORD=sql
+    networks:
+      - heroes_net
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-mysql:/var/lib/mysql
 
   heroes-service:
     image: springio/heroes-service:latest
@@ -14,3 +35,5 @@ services:
     ports:
       - "8083:8083"
 #      - "5005:5005"
+    networks:
+      - heroes_net
