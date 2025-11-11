@@ -3,7 +3,6 @@ package com.uwefuchs.demo.heroestutorial.backend.service;
 import com.uwefuchs.demo.heroestutorial.backend.exception.HeroNotFoundException;
 import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
 import com.uwefuchs.demo.heroestutorial.backend.persistence.IHeroesRepository;
-import org.glassfish.jersey.internal.guava.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,10 +41,17 @@ public class HeroesService {
 
     public Collection<Hero> retrieveHeroesByName(String heroName) {
         Assert.notNull(heroName, "heroName must not be null");
+
         final Collection<Hero> allHeroes = new ArrayList<>();
 
-        LOG.info("searching heroes by name [{}]...", heroName);
-        return Lists.newArrayList(heroesRepository.findByNameIgnoreCase(heroName));
+        if (heroName.length() >= 3)  {
+            LOG.info("searching heroes by name [{}]...", heroName);
+            allHeroes.addAll((Collection<Hero>) heroesRepository.findByNameContainingIgnoreCase(heroName));
+        } else {
+            LOG.info("No search of heroes performed because name too short [{}]...", heroName);
+        }
+
+        return allHeroes;
     }
 
     public Hero updateHero(Hero hero, Integer id) {

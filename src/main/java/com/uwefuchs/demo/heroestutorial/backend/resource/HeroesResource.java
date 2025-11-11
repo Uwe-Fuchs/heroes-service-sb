@@ -1,10 +1,9 @@
 package com.uwefuchs.demo.heroestutorial.backend.resource;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
+import com.uwefuchs.demo.heroestutorial.backend.service.HeroesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -16,19 +15,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
-
-import com.uwefuchs.demo.heroestutorial.backend.persistence.InMemoryHeroesRepository;
-import com.uwefuchs.demo.heroestutorial.backend.service.HeroesService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.uwefuchs.demo.heroestutorial.backend.model.Hero;
 
 @Path("heroes")
 public class HeroesResource {

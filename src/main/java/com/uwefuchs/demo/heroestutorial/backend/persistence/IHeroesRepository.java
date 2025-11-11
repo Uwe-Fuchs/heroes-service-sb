@@ -9,7 +9,7 @@ public interface IHeroesRepository {
 
     Optional<Hero> findById(Integer id);
 
-    Iterable<Hero> findByNameIgnoreCase(String name);
+    Iterable<Hero> findByNameContainingIgnoreCase(String name);
 
     boolean existsById(Integer id);
 

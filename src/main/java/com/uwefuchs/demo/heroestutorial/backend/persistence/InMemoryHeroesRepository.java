@@ -6,7 +6,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class InMemoryHeroesRepository implements IHeroesRepository {
@@ -50,16 +55,14 @@ public class InMemoryHeroesRepository implements IHeroesRepository {
     }
 
     @Override
-    public Iterable<Hero> findByNameIgnoreCase(String name) {
-        final Collection<Hero> allHeroes = new ArrayList<>();
-
+    public Iterable<Hero> findByNameContainingIgnoreCase(String name) {
         LOG.debug("searching heroes by name [{}]...", name);
-        this.findAll().forEach(h -> {
-            if (name.equalsIgnoreCase(h.getName())) {
-                allHeroes.add(h);
-            }});
 
-        return allHeroes;
+        return ((Collection<Hero>) this.findAll()).stream()
+                .filter(Objects::nonNull)
+                .filter(h -> h.getName() != null)
+                .filter(h -> h.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
